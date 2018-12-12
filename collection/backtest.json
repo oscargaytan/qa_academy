@@ -1,0 +1,1792 @@
+{
+	"info": {
+		"_postman_id": "586c0ff5-12f4-4d3e-8b26-4ae98b4f6f64",
+		"name": "BackendWizeQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+			{
+			"_postman_id": "c22e9558-bf77-4640-806d-8dfea5bbb15a",
+			"name": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc2ec231-79a9-4993-a1f3-ec20a9b93587",
+						"type": "text/javascript",
+						"exec": [
+							"// \"install\" Postman BDD",
+							"postman.setGlobalVariable('postmanBDD', responseBody);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+					"protocol": "http",
+					"host": [
+						"bigstickcarpet",
+						"com"
+					],
+					"path": [
+						"postman-bdd",
+						"dist",
+						"postman-bdd.min.js"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "381bbe9f-2f45-4ab3-8d96-553c94cb195e",
+			"name": "Admins",
+			"item": [
+				{
+					"_postman_id": "93ad2c26-7b7b-4e1c-9a71-9e1d4963fd28",
+					"name": "admins test_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9cec5f2a-25e7-4c02-bd3b-63bc54911c9a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"API is not working for not-admins\", function () {",
+									"    pm.response.to.be.notFound;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}admins",
+							"host": [
+								"{{API_Link}}admins"
+							]
+						},
+						"description": "This check if api is working"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "6fe4ee36-f16d-404f-9a50-8037dbed6d01",
+			"name": "Answer",
+			"item": [
+				{
+					"_postman_id": "bd378f78-1477-47c1-8b18-30890d0f9ac2",
+					"name": "POST_new_Answer_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95bb1a28-ac3b-4252-9e64-000a7c99d736",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Make a new answer (not an admin)', () => {",
+									"",
+									"  it('returns a failure error', () => {",
+									"    response.should.have.status(500);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"answer\": \"test\",\n  \"question_id\": 31\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}answers",
+							"host": [
+								"{{API_Link}}answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "4fdb7d53-4d49-47ce-8d65-09ea0ad35d6f",
+					"name": "POST_edit_answer_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfa1eebe-993c-4ce8-90e8-d26ce0c6c119",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Edit an answer (not an admin)', () => {",
+									"",
+									"  it('returns a failure error', () => {",
+									"    response.should.have.status(500);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"answer\": \"Another answer\",\n  \"question_id\": 31\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}answers/edit=31",
+							"host": [
+								"{{API_Link}}answers"
+							],
+							"path": [
+								"edit=31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "55806644-158b-4b2a-8772-8062d01798da",
+					"name": "DELETE_answer_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "12767259-55df-41f8-b4f7-eabc563256a1",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Delete an answer (not an admin)', () => {",
+									"",
+									"  it('returns a failure error', () => {",
+									"    response.should.have.status(500);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}answers/questionId=31",
+							"host": [
+								"{{API_Link}}answers"
+							],
+							"path": [
+								"questionId=31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "6cf5c140-8740-481d-aaf4-51ff355342d2",
+			"name": "Comments",
+			"item": [
+				{
+					"_postman_id": "531e4953-ddc6-47b5-ad03-c5f0c81a4213",
+					"name": "comment_get_normalRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7774d4b5-db78-4fda-a316-e3e2b229b13a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should allow if you are auth and should have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.have.jsonBody()",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}comments/31",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "2097a304-ce8a-4c11-8449-de9f0a902a79",
+					"name": "CommentId_boundary_-1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "51c8098c-0ff4-4914-98a8-9025641dc1bc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should be empty array if not valid ID\", function () {",
+									"    pm.response.to.be.ok;",
+									"    var emptyArray='[]';",
+									"    pm.response.to.have.body(emptyArray);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}comments/-1",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								"-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "800478de-5bc9-4ae3-9e80-3e3ff9f92f9e",
+					"name": "GET_Comments_NaN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "36385552-6728-4d27-84ef-72fd13ef0e8c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should be empty array if not valid ID\", function () {",
+									"    pm.response.to.be.ok;",
+									"    var emptyArray='[]';",
+									"    pm.response.to.have.body(emptyArray);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}comments/ftvf",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								"ftvf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "eed0904c-3c03-475a-b504-4120fcb14178",
+					"name": "POST_comments_happypath",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "39284d06-8316-4839-9679-49f5b51a3488",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1b23671-4ef3-4920-9f6f-e3d1605798cb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should be ok in a happy path\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody()",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\": \"string\",\n  \"questionId\": 22,\n  \"isAnonymous\": 0\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}comments/",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "34cd7d9d-743a-4cf7-9c30-4c78b55f1916",
+					"name": "POST_comment_invalidID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c25faac9-0776-464d-b272-356e752b8dd7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should not be ok with an invalid questionId\", function () {",
+									"    pm.response.to.be.clientError;",
+									"    pm.response.to.have.jsonBody()",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\": \"string\",\n  \"questionId\": -1,\n  \"isAnonymous\": 1\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}comments/",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "c94b3633-df62-4359-a39d-e6bcaa1a6efd",
+					"name": "DeletingAnExistingComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2cdb1fda-482d-4af5-89ca-6503600558b0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response shoul be succesfully when deleting a comment\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody()",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}comments/38",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								"38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "1e83aba6-86a8-4849-8fd2-2dc0fc05999f",
+					"name": "PUT_edit_a_comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b35e978b-51ed-411f-ac7e-bf63fa3664fc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"should be succesfully when editing a comment\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody()",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 11,\n  \"comment\": \"commentedited{{$randomInt}}\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}comments/11",
+							"host": [
+								"{{API_Link}}comments"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "39f8903c-a48d-4faa-99ec-0b53955549d6",
+			"name": "Contact",
+			"item": [
+				{
+					"_postman_id": "10682056-f429-4ea4-bc44-52a00398cb02",
+					"name": "POST_new_contact_request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b9d50aa5-43cc-40fe-b0d8-0b8fe3e6a755",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should be OK when sending contact\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"string\",\n  \"subject\": \"string\",\n  \"content\": {\n    \"fullName\": \"string\",\n    \"email\": \"string\",\n    \"reason\": \"string\",\n    \"message\": \"string\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}contact/",
+							"host": [
+								"{{API_Link}}contact"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "dcbb7380-6447-4883-abf0-dd3db3414723",
+			"name": "Employees",
+			"item": [
+				{
+					"_postman_id": "8e816431-3771-4536-87ce-9f6873a3e7f3",
+					"name": "GET_adminemployeeALL_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3edf66e4-800a-4682-9b50-4104266371da",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON with infromation about employees\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}employees/",
+							"host": [
+								"{{API_Link}}employees"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "bb90e55d-c0a0-4f3c-9228-e325103e2043",
+					"name": "PUT_adminEmployee_",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d892e05-b63b-4e4b-be50-4f26a2d57c79",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON and success when editing an employee\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"is_admin\": true\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}employees/184",
+							"host": [
+								"{{API_Link}}employees"
+							],
+							"path": [
+								"184"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "e1d6a519-3099-4573-93f6-5323d3c4cf9f",
+					"name": "GET_employee_profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aecb8cc8-967e-42ab-ad36-c8bd36c593e1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON and success when getting your profile\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}employees/profile",
+							"host": [
+								"{{API_Link}}employees"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "42df739d-a00c-47ec-83e5-e934815b1f21",
+			"name": "Health",
+			"item": [
+				{
+					"_postman_id": "c91708f4-be14-45fe-84db-8dc94f229c5f",
+					"name": "GET_health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf57316d-0a2f-491d-893f-80aaf21af30d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON and success when getting your profile\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}health/",
+							"host": [
+								"{{API_Link}}health"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "113787c3-1d7b-4722-bb07-fc8f5ebd47a6",
+			"name": "Questions",
+			"item": [
+				{
+					"_postman_id": "5b24e203-0bc2-4cca-8738-8f73ca3d4739",
+					"name": "POST_new_question_as_anonymous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f05115c-78c0-4582-99ca-b1a6c7995067",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Make a new question', () => {",
+									"",
+									"  it('returns a successfull response when posting a new question as anonymous', () => {",
+									"    response.should.have.status(201);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isAnonymous\": true,\n  \"location\": \"GDL\",\n  \"question\": \"hello this is a new question please ignore\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}questions/",
+							"host": [
+								"{{API_Link}}questions"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "72d7c175-fe33-4f56-9d2e-190f40554f59",
+					"name": "POST_new_question_as_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7fe7ea62-1174-4e38-b743-b40f9ad46ea5",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Make a new question', () => {",
+									"",
+									"  it('returns a successfull response when posting a new question as yourself', () => {",
+									"    response.should.have.status(201);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isAnonymous\": false,\n  \"location\": \"GDL\",\n  \"question\": \"hello this is a new question please ignore\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}questions/",
+							"host": [
+								"{{API_Link}}questions"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "4a7328a2-8729-406a-abb6-8b8e7d0eb271",
+					"name": "PUT_edit_question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03a95951-7c38-438e-9c4d-c74211e6f9d5",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Update a question', () => {",
+									"",
+									"  it('returns a successfull response when editing a question', () => {",
+									"    response.should.have.status(200);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question_id\": 36,\n  \"isAnonymous\": false,\n  \"user\": {\n    \"email\": \"oscar.gaytan\"\n  },\n  \"question\": \"hola esto esta editado jeje\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}questions/",
+							"host": [
+								"{{API_Link}}questions"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "b59d54fd-43c3-4958-b0e1-126c0d51cff9",
+					"name": "GET_questions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54871735-5c94-4090-870b-6838498a5b24",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get the questions', () => {",
+									"",
+									"  it('returns a JSON with the required questions', () => {",
+									"    response.should.have.status(200);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}questions?targetLocation=ALL",
+							"host": [
+								"{{API_Link}}questions"
+							],
+							"query": [
+								{
+									"key": "targetLocation",
+									"value": "ALL"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "2428e703-ed30-4167-83e0-79465869a42a",
+			"name": "Topic Tags",
+			"item": [
+				{
+					"_postman_id": "7cb1ddf7-39a9-4c4c-9f6e-adbcf43dc33f",
+					"name": "GET_tags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de6e8077-69c3-49e7-9c23-c9a0b271cde4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON and success when getting tags\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}tags",
+							"host": [
+								"{{API_Link}}tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "0470680c-1d28-48a6-856d-5b48a21f9581",
+					"name": "POST_add_new",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "383fdf0d-8efb-40c4-aeda-9cfce9d789ca",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should a JSON and success when posting a new tag\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Tag{{$randomInt}}\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}tags",
+							"host": [
+								"{{API_Link}}tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "257bd111-dc53-495a-a149-9fab45514218",
+					"name": "GET_byID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93dffb68-22ba-4434-a80c-ae38ab1f7f4c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"returns a JSON and success when getting specific tag\", function () {",
+									"    pm.response.to.be.success;",
+									"    pm.response.to.have.jsonBody();",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}tags/366",
+							"host": [
+								"{{API_Link}}tags"
+							],
+							"path": [
+								"366"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "be9855f7-275b-4a0c-a348-491cbb5b0d1d",
+					"name": "GET_tagbyId_fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc23a276-1654-47a4-a5fe-4c256891bd49",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response should fail\", function () {",
+									"    pm.response.to.be.clientError;",
+									"    pm.response.to.have.jsonBody();",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}tags/tfr",
+							"host": [
+								"{{API_Link}}tags"
+							],
+							"path": [
+								"tfr"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "4b77e289-8f95-43b7-9cec-53602c1eb2d8",
+					"name": "PUT_edit_tagADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b27cc82-da8f-4d79-9079-4e9e7f1dbbb0",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Edit a tag question', () => {",
+									"",
+									"  it('returns a failure message (not an admin)', () => {",
+									"    response.should.have.status(500);",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"strintgfrc\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}tags/367",
+							"host": [
+								"{{API_Link}}tags"
+							],
+							"path": [
+								"367"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "c9e0460d-b702-413a-9b99-f897e96a5238",
+			"name": "Target Locations",
+			"item": [
+				{
+					"_postman_id": "61e8f460-c1d7-4246-9d8d-a1e58cf78e75",
+					"name": "GET_all_locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eadb6c9c-8d27-4670-a456-b34ffd73f0c8",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get all locations', () => {",
+									"",
+									"  it('should return a valid response with the locations', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}locations",
+							"host": [
+								"{{API_Link}}locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "0edd456c-bf01-432a-b16a-09266e23df64",
+					"name": "POST_new_location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6812facb-6ae5-416b-bb24-95df137353f6",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Insert location', () => {",
+									"",
+									"  it('should return a valid response when created a new location', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"vfcdxsz\",\n  \"value\": \"ST\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}locations",
+							"host": [
+								"{{API_Link}}locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "4ea3db36-7f09-4abf-904b-cca32435ad87",
+					"name": "GET_specific_location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6951a24b-6994-45b5-ab40-9857604b73e2",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get one location', () => {",
+									"",
+									"  it('returns a valid response when getting one location', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}locations/996",
+							"host": [
+								"{{API_Link}}locations"
+							],
+							"path": [
+								"996"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "57866620-3be4-4cd5-8775-8b94e0d97cc1",
+					"name": "PUT_edit_location_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78995bd5-abf2-4327-99b3-446602e384c0",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Edit a location', () => {",
+									"",
+									"  it('returns a valid response when getting one location', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"All\",\n  \"value\": \"ALL2\"\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}locations/996",
+							"host": [
+								"{{API_Link}}locations"
+							],
+							"path": [
+								"996"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "9572d122-c715-4070-aca3-65699e20879c",
+					"name": "DELETE_existing_location_ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93092fce-a184-4ac0-b170-886777852950",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Delete one location', () => {",
+									"",
+									"  it('returns a valid response when deleting', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_Link}}locations/1000",
+							"host": [
+								"{{API_Link}}locations"
+							],
+							"path": [
+								"1000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "2c7d2546-4516-493f-87ee-d7ae1276e945",
+			"name": "Vote",
+			"item": [
+				{
+					"_postman_id": "bd4f4c2e-e87c-41b5-97ff-5357bc1a8c8f",
+					"name": "GET_votes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44a1d3da-3004-4cd0-9fe0-81e48c93c9d7",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Getting votes', () => {",
+									"",
+									"  it('returns a valid response with the votes made', () => {",
+									"    response.should.have.status(200);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_Link}}vote/",
+							"host": [
+								"{{API_Link}}vote"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "8bfefe46-5bae-460d-999e-f53f8d669ec5",
+					"name": "POST_new_vote",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60bc8698-b44e-4a25-b2ab-5a8f029624cc",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Make a new upvote', () => {",
+									"",
+									"  it('returns a successfull response when give a vote', () => {",
+									"    response.should.have.status(201);",
+									"    response.should.be.json;",
+									"    response.body.should.not.be.empty;",
+									"  });",
+									"});",
+									"  "
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/javascript"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question_id\": 22,\n  \"is_upvote\": true\n}"
+						},
+						"url": {
+							"raw": "{{API_Link}}vote/",
+							"host": [
+								"{{API_Link}}vote"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "c22e9558-bf77-4640-806d-8dfea5bbb15a",
+			"name": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc2ec231-79a9-4993-a1f3-ec20a9b93587",
+						"type": "text/javascript",
+						"exec": [
+							"// \"install\" Postman BDD",
+							"postman.setGlobalVariable('postmanBDD', responseBody);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+					"protocol": "http",
+					"host": [
+						"bigstickcarpet",
+						"com"
+					],
+					"path": [
+						"postman-bdd",
+						"dist",
+						"postman-bdd.min.js"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e2d41703-0945-45c9-9006-cbc7c2e9552f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4b18301c-a19d-4b5c-89c6-66c0eda99576",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
