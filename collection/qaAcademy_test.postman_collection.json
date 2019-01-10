@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "2254c053-5cfa-4296-94f8-e17eb073d9db",
+		"name": "qaAcademy_test",
+		"description": "Just a simple call",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://reqres.in/api/users?page${value}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1d856b8-e638-4f64-911d-369a47375ad8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check “page” value in response same as page parameter value in url\", function () {",
+							"\tvar jsonData = pm.response.json();",
+							"\tvar pageValue = parseInt(environment.value, 10);",
+							"    pm.expect(jsonData.page).to.eql(pageValue);",
+							"});",
+							"",
+							"pm.test(\"Check data not empty.\", function () {",
+							"\tpm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"Check “per page same as length of data.\", function () {",
+							"\tvar jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.length).to.eql(jsonData.per_page);",
+							"});",
+							"",
+							"pm.test(\"Check total is greater than 0\", function () {",
+							"\tvar jsonData = pm.response.json();",
+							"\tvar dataValue = parseInt(jsonData.total, 10);",
+							"    pm.expect(dataValue).to.gt(0);",
+							"});",
+							"",
+							"// pm.test(\"Check ID should be an integer\", function () {",
+							"// \tvar jsonData = pm.response.json();",
+							"//     pm.expect(jsonData.data[0].id).to.be.a('number')",
+							"// });",
+							"",
+							"pm.test(\"Check page is more than total page\", function () {",
+							"\tvar jsonData = pm.response.json();",
+							"\tvar totalPageValue = parseInt(jsonData.total_pages, 10);",
+							"\tvar pageValue = parseInt(jsonData.page, 10);",
+							"    pm.expect(totalPageValue).to.gt(pageValue);",
+							"});",
+							"",
+							"pm.test(\"Check response is a JSON\", function () {",
+							"\tpm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Validate time respons\", function () {",
+							"\tpm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users?page={{value}}",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{{value}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
